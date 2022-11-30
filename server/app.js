@@ -1,7 +1,26 @@
 const express = require('express');
 const app = express();
 
+// scenario 1
+// guess: ?
+// real: first, fifth, seventh
+// matches first, bc '/', matches fifth bc err param,
+// matches seventh bc params, sends and ends
+
+// scenario 2
+// guess: third, fourth
+// real: first, fifth, sixth, seventh
+// matches first because of '/', goes fifth bc err param
+// matches sixth bc '/other-resource', no error, matches seventh, ends
+
+// scenario 3
+// guess: first, fifth, seventh
+// real: first, fifth, seventh
+// matches first, bc '/', matches fifth bc err param,
+// doesn't match other paths, matches seventh bc params, sends and ends
+
 // First
+// matches every request with path '/'
 app.use('/', (req, res, next) => {
   console.log('First');
   const error = new Error('First');
